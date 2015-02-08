@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace WNowicki\Cli;
 
 /**
@@ -84,7 +84,9 @@ class ScreenRow
             $offset = $this->length + $offset;
         }
 
-        $string = str_split($string);
+        if (is_string($string)) {
+            $string = str_split($string);
+        }
 
         foreach ($string as $pixel) {
 
