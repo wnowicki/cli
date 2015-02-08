@@ -1,7 +1,9 @@
 {
     "name": "wnowicki/cli",
     "description": "PHP CLI",
-    "psr-4": {
-        "WNowicki\\Cli\\": "lib"
+    "autoload": {
+        "psr-4": {
+            "WNowicki\\Cli\\": "lib"
+        }
     }
 }
