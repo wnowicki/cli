@@ -33,8 +33,8 @@ class Screen implements \Iterator
     {
         $this->fill = $fill;
 
-        $this->rows = exec('tput lines');
-        $this->cols = exec('tput cols');
+        $this->rows = (int) exec('tput lines');
+        $this->cols = (int) exec('tput cols');
 
         $this->matrix = $this->buildMatrix($this->rows, $this->cols, $fill);
     }
@@ -112,6 +112,28 @@ class Screen implements \Iterator
         $this->matrix[$row]->putIn($string, $offset);
 
         return $this;
+    }
+
+    /**
+     * Get Number of Rows on Screen
+     *
+     * @author WN
+     * @return int
+     */
+    public function rows()
+    {
+        return $this->rows;
+    }
+
+    /**
+     * Get Number of Columns on Screen
+     *
+     * @author WN
+     * @return int
+     */
+    public function cols()
+    {
+        return $this->cols;
     }
 
     /**
