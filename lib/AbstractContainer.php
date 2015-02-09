@@ -53,9 +53,30 @@ abstract class AbstractContainer implements ContainerInterface
         return $this->rows;
     }
 
+    /**
+     * Returns Offset to Place Container in the Center
+     *
+     * @author WN
+     * @param ContainerInterface $container
+     * @return float
+     */
     public function placeInCenter(ContainerInterface $container)
     {
-        return floor($this->width()/2) - floor($container->width()/2);
+        return floor(($this->width() - $container->width())/2);
+    }
+
+    /**
+     * @param ContainerInterface $container
+     * @param $columns
+     * @param int $column
+     * @param bool $center
+     * @return int
+     */
+    public function placeInColumn(ContainerInterface $container, $columns = 1, $column = 0, $center = true)
+    {
+        $columnSize = $this->width()/$columns;
+
+        return floor($column * $columnSize + ($center?floor(($columnSize - $container->width())/2):0));
     }
 
     /**
