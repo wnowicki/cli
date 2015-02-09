@@ -10,7 +10,7 @@
 
 namespace WNowicki\Cli;
 
-abstract class AbstractContainer
+abstract class AbstractContainer implements ContainerInterface
 {
     /** @var ScreenRow[]  */
     protected  $matrix = [];
@@ -35,6 +35,27 @@ abstract class AbstractContainer
         }
 
         return $output;
+    }
+
+    /**
+     * @return int
+     */
+    public function width()
+    {
+        return $this->cols;
+    }
+
+    /**
+     * @return int
+     */
+    public function height()
+    {
+        return $this->rows;
+    }
+
+    public function placeInCenter(ContainerInterface $container)
+    {
+        return floor($this->width()/2) - floor($container->width()/2);
     }
 
     /**
