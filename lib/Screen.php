@@ -69,35 +69,6 @@ class Screen extends AbstractContainer implements \Iterator
     }
 
     /**
-     * Put String In Screen
-     *
-     * @author WN
-     * @param string $string
-     * @param int $row
-     * @param int $offset
-     * @return $this
-     */
-    public function putIn($string, $row = 0, $offset = 0)
-    {
-        if ($row < 0) {
-
-            $row = $this->rows + $row;
-        }
-
-        if ($string instanceof Box) {
-
-            foreach($string as $content) {
-                $this->matrix[$row++]->putIn($content->toString(), $offset);
-            }
-
-        } else {
-            $this->matrix[$row]->putIn($string, $offset);
-        }
-
-        return $this;
-    }
-
-    /**
      * Clears Screen
      *
      * @author WN

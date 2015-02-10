@@ -38,6 +38,36 @@ abstract class AbstractContainer implements ContainerInterface
     }
 
     /**
+     * Put String In Container
+     *
+     * @author WN
+     * @param string|Box $element
+     * @param int $row
+     * @param int $offset
+     * @return $this
+     */
+    public function putIn($element, $row = 0, $offset = 0)
+    {
+        if ($row < 0) {
+
+            $row = $this->rows + $row;
+        }
+
+        if ($element instanceof Box) {
+
+            foreach($element as $content) {
+                print_r($row);
+                $this->matrix[$row++]->putIn($content->toString(), $offset);
+            }
+
+        } else {
+            $this->matrix[$row]->putIn($element, $offset);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function width()

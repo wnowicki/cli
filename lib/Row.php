@@ -73,7 +73,7 @@ class Row
      * Put String In Row
      *
      * @author WN
-     * @param string $string
+     * @param string|Text $string
      * @param int $offset
      * @return $this
      */
