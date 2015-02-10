@@ -11,12 +11,12 @@
 namespace WNowicki\Cli;
 
 /**
- * Class ScreenRow
+ * Class Row
  *
  * @author WN
  * @package WNowicki\Cli
  */
-class ScreenRow
+class Row
 {
     private $vector = [];
     private $fill;
@@ -45,11 +45,11 @@ class ScreenRow
      * @author WN
      * @param $length
      * @param string $fill
-     * @return ScreenRow
+     * @return Row
      */
     public static function make($length, $fill = ' ')
     {
-        return new ScreenRow($length, $fill);
+        return new Row($length, $fill);
     }
 
     /**

@@ -10,7 +10,7 @@
 
 namespace WNowicki\Cli;
 
-class Box extends AbstractContainer implements \Iterator
+class Box extends AbstractContainer implements ContainerInterface, \Iterator
 {
     public function __construct($cols, $rows, $fill = ' ')
     {

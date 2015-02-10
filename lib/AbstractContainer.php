@@ -12,7 +12,7 @@ namespace WNowicki\Cli;
 
 abstract class AbstractContainer implements ContainerInterface
 {
-    /** @var ScreenRow[]  */
+    /** @var Row[]  */
     protected  $matrix = [];
     protected  $current = 0;
     protected  $rows;
@@ -24,14 +24,14 @@ abstract class AbstractContainer implements ContainerInterface
      * @param $rows
      * @param $cols
      * @param $fill
-     * @return ScreenRow[]
+     * @return Row[]
      */
     protected function buildMatrix($rows, $cols, $fill)
     {
         $output = [];
 
         for ($y=0; $y < $rows; $y++) {
-            $output[] = ScreenRow::make($cols, $fill);
+            $output[] = Row::make($cols, $fill);
         }
 
         return $output;
@@ -83,7 +83,7 @@ abstract class AbstractContainer implements ContainerInterface
      * (PHP 5 &gt;= 5.0.0)<br/>
      * Return the current element
      * @link http://php.net/manual/en/iterator.current.php
-     * @return ScreenRow
+     * @return Row
      */
     public function current()
     {
@@ -124,7 +124,7 @@ abstract class AbstractContainer implements ContainerInterface
      */
     public function valid()
     {
-        if ($this->current() instanceof ScreenRow) {
+        if ($this->current() instanceof Row) {
 
             return true;
         }
