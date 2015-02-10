@@ -110,6 +110,24 @@ abstract class AbstractContainer implements ContainerInterface
     }
 
     /**
+     * Add Simple Border
+     *
+     * @author WN
+     * @param string $fill
+     * @return $this
+     */
+    public function addBorder($fill = '*')
+    {
+        $box = Box::make($this->width(), 1, $fill);
+        $this->putIn($box, 0, 0)->putIn($box, $this->height()-1, 0);
+
+        $box = Box::make(1, $this->height(), $fill);
+        $this->putIn($box, 0, 0)->putIn($box, 0, $this->width()-1);
+
+        return $this;
+    }
+
+    /**
      * (PHP 5 &gt;= 5.0.0)<br/>
      * Return the current element
      * @link http://php.net/manual/en/iterator.current.php
