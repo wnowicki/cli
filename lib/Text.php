@@ -20,29 +20,11 @@ class Text implements ContainerInterface, \Iterator
 {
     const RESET = "\033[0m";
 
-    const COLOR_BLACK = 30;
-    const COLOR_RED = 31;
-    const COLOR_GREEN = 32;
-    const COLOR_YELLOW = 33;
-    const COLOR_BLUE = 34;
-    const COLOR_MAGENTA = 35;
-    const COLOR_CYAN = 36;
-    const COLOR_WHITE = 37;
-
     const BOLD = 1;
     const UNDERSCORE = 4;
     const BLINK = 5;
     const REVERSE = 7;
     const CONCEAL = 8;
-
-    const BG_BLACK = 40;
-    const BG_RED = 41;
-    const BG_GREEN = 42;
-    const BG_YELLOW = 43;
-    const BG_BLUE = 44;
-    const BG_MAGENTA = 45;
-    const BG_CYAN = 46;
-    const BG_WHITE = 47;
 
     private $string;
     private $current = 0;
