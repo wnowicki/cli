@@ -127,6 +127,16 @@ abstract class AbstractContainer implements ContainerInterface
         return $this;
     }
 
+    public function addTitle($title, $size = 0, $border = '*')
+    {
+        $string = Text::make($title);
+
+        $box = Box::make($this->width(), $size*2+3)->addBorder($border);
+        $box->putIn($string, $size+1, $box->placeInCenter($string));
+
+        return $this->putIn($box);
+    }
+
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
      * Return the current element

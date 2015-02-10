@@ -16,7 +16,7 @@ namespace WNowicki\Cli;
  * @author WN
  * @package WNowicki\Cli
  */
-class Text implements \Iterator
+class Text implements ContainerInterface, \Iterator
 {
     const RESET = "\033[0m";
 
@@ -142,6 +142,27 @@ class Text implements \Iterator
     {
         return $this->render($this->string);
     }
+
+    /**
+     * Container Width
+     *
+     * @return int
+     */
+    public function width()
+    {
+        return strlen($this->string);
+    }
+
+    /**
+     * Container Height
+     *
+     * @return int
+     */
+    public function height()
+    {
+        return 1;
+    }
+
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
