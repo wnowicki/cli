@@ -145,7 +145,6 @@ class Text implements ContainerInterface, \Iterator
         return 1;
     }
 
-
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
      * Return the current element
