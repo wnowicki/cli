@@ -28,6 +28,30 @@ class Box extends AbstractBox implements ContainerInterface
      */
     static public function make($width, $height, $color = null, $option = null, $bgcolor = null)
     {
-        return new static($width, $height, $color, $option, $bgcolor);
+        return new self($width, $height, $color, $option, $bgcolor);
+    }
+
+    public static function makeFromString($string, $color = null, $option = null, $bgcolor = null)
+    {
+        if (!is_string($string)) {
+
+            throw new \InvalidArgumentException('Argument must be string');
+        }
+
+        $ar = explode("\n", $string);
+
+        $height = count($ar);
+        $width = strlen(max($ar));
+
+        $obj = new self($width, $height, $color, $option, $bgcolor);
+
+        $i = 0;
+
+        foreach ($obj as $row) {
+
+            $row->put(Row::makeFromString($ar[$i++]), $color, $option, $bgcolor);
+        }
+
+        return $obj;
     }
 }

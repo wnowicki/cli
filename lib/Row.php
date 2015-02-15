@@ -103,7 +103,7 @@ class Row extends AbstractContainer implements ContainerInterface
 
         foreach ($content as $char) {
 
-            $this->row[$offset]->inherit($char);
+            $this->row[$offset++]->inherit($char);
         }
 
         return $this;

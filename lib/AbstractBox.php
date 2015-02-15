@@ -35,6 +35,31 @@ abstract class AbstractBox extends AbstractContainer
         $this->rows = $this->buildMatrix($width, $height, $color, $option, $bgcolor);
     }
 
+    public function put($element, $offset, $row)
+    {
+        if ($row < 0) {
+
+            $row = $this->getHeight() + $row;
+        }
+
+        if ($element instanceof Box) {
+
+            foreach ($element as $content) {
+
+                $this->rows[$row++]->put($content, $offset);
+            }
+
+        } elseif (is_string($element)) {
+
+            $this->put(Box::makeFromString($element, $this->color, $this->option, $this->bgcolor), $offset, $row);
+        } else {
+
+            throw new \InvalidArgumentException('Element must be type of Box or string');
+        }
+
+        return $this;
+    }
+
     /**
      * @author WN
      * @param int $width
