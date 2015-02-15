@@ -21,6 +21,32 @@ abstract class AbstractBox extends AbstractContainer
     private $rows = [];
     private $pointer = 0;
 
+    protected function __construct($width, $height, $color = null, $option = null, $bgcolor = null)
+    {
+        $this->setWidth($width)->setHeight($height);
+
+        $this->rows = $this->buildMatrix($width, $height, $color, $option, $bgcolor);
+    }
+
+    /**
+     * @author WN
+     * @param int $width
+     * @param int $height
+     * @param int|null $color
+     * @param int|null $option
+     * @param int|null $bgcolor
+     * @return Row[]
+     */
+    protected function buildMatrix($width, $height, $color, $option, $bgcolor)
+    {
+        $output = [];
+
+        for ($y=0; $y < $height; $y++) {
+            $output[] = Row::make($width, $color, $option, $bgcolor);
+        }
+
+        return $output;
+    }
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
