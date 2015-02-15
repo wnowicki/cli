@@ -18,4 +18,16 @@ namespace WNowicki\Cli;
  */
 class Box extends AbstractBox implements ContainerInterface
 {
+    /**
+     * @param int $width
+     * @param int $height
+     * @param int|null $color
+     * @param int|null $option
+     * @param int|null $bgcolor
+     * @return Box
+     */
+    static public function make($width, $height, $color = null, $option = null, $bgcolor = null)
+    {
+        return new static($width, $height, $color, $option, $bgcolor);
+    }
 }

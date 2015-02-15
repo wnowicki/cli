@@ -20,10 +20,17 @@ abstract class AbstractBox extends AbstractContainer
 {
     private $rows = [];
     private $pointer = 0;
+    private $color;
+    private $option;
+    private $bgcolor;
 
     protected function __construct($width, $height, $color = null, $option = null, $bgcolor = null)
     {
         $this->setWidth($width)->setHeight($height);
+
+        $this->color = $color;
+        $this->option = $option;
+        $this->bgcolor = $bgcolor;
 
         $this->rows = $this->buildMatrix($width, $height, $color, $option, $bgcolor);
     }
@@ -46,6 +53,24 @@ abstract class AbstractBox extends AbstractContainer
         }
 
         return $output;
+    }
+
+    /**
+     * Reset Box
+     *
+     * @return $this
+     */
+    public function reset()
+    {
+        $this->rows = $this->buildMatrix(
+            $this->getWidth(),
+            $this->getHeight(),
+            $this->color,
+            $this->option,
+            $this->bgcolor
+        );
+
+        return $this;
     }
 
     /**
