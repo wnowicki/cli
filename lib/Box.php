@@ -49,7 +49,7 @@ class Box extends AbstractBox implements ContainerInterface
 
         foreach ($obj as $row) {
 
-            $row->put(Row::makeFromString($ar[$i++]), $color, $option, $bgcolor);
+            $row->put(Row::makeFromString($ar[$i++], $color, $option, $bgcolor));
         }
 
         return $obj;

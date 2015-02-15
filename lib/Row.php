@@ -89,7 +89,7 @@ class Row extends AbstractContainer implements ContainerInterface
      * @param int $offset
      * @return $this
      */
-    public function put(Row $content, $offset)
+    public function put(Row $content, $offset = 0)
     {
         if ($offset < 0) {
 
