@@ -39,10 +39,11 @@ class Char
      * @author WN
      * @param string|null $content
      * @param int|null $color
+     * @param int|null $option
      * @param int|null $bgcolor
      * @return Char
      */
-    public static function make($content = null, $color = null, $bgcolor = null)
+    public static function make($content = null, $color = null, $option = null, $bgcolor = null)
     {
         $obj = new self($content);
 
