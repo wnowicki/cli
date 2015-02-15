@@ -16,7 +16,7 @@ namespace WNowicki\Cli;
  * @author WN
  * @package WNowicki\Cli
  */
-interface ContainerInterface
+interface ContainerInterface extends \Iterator
 {
     /**
      * Get Container Width

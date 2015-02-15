@@ -16,6 +16,6 @@ namespace WNowicki\Cli;
  * @author WN
  * @package WNowicki\Cli
  */
-class Screen extends AbstractContainer implements \Iterator
+class Screen extends AbstractBox implements ContainerInterface
 {
 }

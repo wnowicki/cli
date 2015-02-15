@@ -16,6 +16,6 @@ namespace WNowicki\Cli;
  * @author WN
  * @package WNowicki\Cli
  */
-class Box extends AbstractContainer implements ContainerInterface, \Iterator
+class Box extends AbstractBox implements ContainerInterface
 {
 }
