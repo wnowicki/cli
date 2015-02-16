@@ -23,18 +23,26 @@ abstract class AbstractBox extends AbstractContainer
     private $color;
     private $option;
     private $bgcolor;
+    private $default;
 
-    protected function __construct($width, $height, $color = null, $option = null, $bgcolor = null)
+    protected function __construct($width, $height, $color = null, $option = null, $bgcolor = null, $default = null)
     {
         $this->setWidth($width)->setHeight($height);
 
         $this->color = $color;
         $this->option = $option;
         $this->bgcolor = $bgcolor;
+        $this->default = $default;
 
-        $this->rows = $this->buildMatrix($width, $height, $color, $option, $bgcolor);
+        $this->rows = $this->buildMatrix($width, $height, $color, $option, $bgcolor, $default);
     }
 
+    /**
+     * @param Box|string $element
+     * @param int $offset
+     * @param int $row
+     * @return $this
+     */
     public function put($element, $offset, $row)
     {
         if ($row < 0) {
@@ -61,20 +69,42 @@ abstract class AbstractBox extends AbstractContainer
     }
 
     /**
+     * Add Border
+     *
+     * @author WN
+     * @param string $fill
+     * @param int|null $color
+     * @param int|null $bgcolor
+     * @return $this
+     */
+    public function addBorder($fill = '*', $color = null, $bgcolor = null)
+    {
+        $box = Box::make($this->getWidth(), 1, $color, null, $bgcolor, $fill);
+
+        $this->put($box, 0, 0)->put($box, 0, $this->getHeight()-1);
+
+        $box = Box::make(1, $this->getHeight(), $color, null, $bgcolor, $fill);
+
+        $this->put($box, 0, 0)->put($box, $this->getWidth()-1, 0);
+        return $this;
+    }
+
+    /**
      * @author WN
      * @param int $width
      * @param int $height
      * @param int|null $color
      * @param int|null $option
      * @param int|null $bgcolor
+     * @param string|null $default
      * @return Row[]
      */
-    protected function buildMatrix($width, $height, $color, $option, $bgcolor)
+    protected function buildMatrix($width, $height, $color, $option, $bgcolor, $default)
     {
         $output = [];
 
         for ($y=0; $y < $height; $y++) {
-            $output[] = Row::make($width, $color, $option, $bgcolor);
+            $output[] = Row::make($width, $color, $option, $bgcolor, $default);
         }
 
         return $output;
@@ -92,7 +122,8 @@ abstract class AbstractBox extends AbstractContainer
             $this->getHeight(),
             $this->color,
             $this->option,
-            $this->bgcolor
+            $this->bgcolor,
+            $this->default
         );
 
         return $this;

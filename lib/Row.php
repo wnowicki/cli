@@ -29,12 +29,13 @@ class Row extends AbstractContainer implements ContainerInterface
      * @param int|null $color
      * @param int|null $option
      * @param int|null $bgcolor
+     * @param string|null $default
      */
-    private function __construct($width, $color = null, $option = null, $bgcolor = null)
+    private function __construct($width, $color = null, $option = null, $bgcolor = null, $default = null)
     {
         $this->setWidth($width)->setHeight(1);
 
-        $this->row = $this->buildVector($width, $color, $option, $bgcolor);
+        $this->row = $this->buildVector($width, $color, $option, $bgcolor, $default);
     }
 
     /**
@@ -45,11 +46,12 @@ class Row extends AbstractContainer implements ContainerInterface
      * @param int|null $color
      * @param int|null $option
      * @param int|null $bgcolor
+     * @param string|null $default
      * @return Row
      */
-    public static function make($width, $color = null, $option = null, $bgcolor = null)
+    public static function make($width, $color = null, $option = null, $bgcolor = null, $default = null)
     {
-        return new self($width, $color, $option, $bgcolor);
+        return new self($width, $color, $option, $bgcolor, $default);
     }
 
     /**
@@ -149,18 +151,19 @@ class Row extends AbstractContainer implements ContainerInterface
 
     /**
      * @author WN
-     * @param int $length
-     * @param int $color
-     * @param int $option
-     * @param int $bgcolor
+     * @param int|null $length
+     * @param int|null $color
+     * @param int|null $option
+     * @param int|null $bgcolor
+     * @param string|null $default
      * @return Char[]
      */
-    private function buildVector($length, $color, $option, $bgcolor)
+    private function buildVector($length, $color, $option, $bgcolor, $default)
     {
         $output = [];
 
         for ($i=0; $i < $length; $i++) {
-            $output[] = Char::make(null, $color, $option, $bgcolor);
+            $output[] = Char::make(null, $color, $option, $bgcolor, $default);
         }
 
         return $output;

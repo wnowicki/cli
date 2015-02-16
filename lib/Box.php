@@ -26,9 +26,9 @@ class Box extends AbstractBox implements ContainerInterface
      * @param int|null $bgcolor
      * @return Box
      */
-    static public function make($width, $height, $color = null, $option = null, $bgcolor = null)
+    static public function make($width, $height, $color = null, $option = null, $bgcolor = null, $default = null)
     {
-        return new self($width, $height, $color, $option, $bgcolor);
+        return new self($width, $height, $color, $option, $bgcolor, $default);
     }
 
     public static function makeFromString($string, $color = null, $option = null, $bgcolor = null)

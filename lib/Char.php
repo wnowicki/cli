@@ -24,6 +24,7 @@ class Char
     private $color = null;
     private $bgcolor = null;
     private $option = null;
+    private $default;
 
     const BOLD = 1;
     const UNDERSCORE = 4;
@@ -43,7 +44,7 @@ class Char
      * @param int|null $bgcolor
      * @return Char
      */
-    public static function make($content = null, $color = null, $option = null, $bgcolor = null)
+    public static function make($content = null, $color = null, $option = null, $bgcolor = null, $default = null)
     {
         $obj = new self($content);
 
@@ -58,6 +59,8 @@ class Char
         if ($bgcolor !== null) {
             $obj->setBgcolor($bgcolor);
         }
+
+        $obj->setDefault($default);
 
         return $obj;
     }
@@ -81,6 +84,10 @@ class Char
             $this->setBgcolor($char->getBgcolor());
         }
 
+        if ($char->getDefault() !== null) {
+            $this->setDefault($char->getDefault());
+        }
+
         return $this;
     }
 
@@ -93,7 +100,7 @@ class Char
 
         if ($string === null) {
 
-            $string = ' ';
+            $string = $this->getDefault();
         }
 
         if ($this->getBgcolor() !== null) {
@@ -210,6 +217,41 @@ class Char
         }
 
         $this->bgcolor = $bgcolor;
+        return $this;
+    }
+
+    /**
+     * @author WN
+     * @return string
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * @author WN
+     * @param string $default
+     * @return $this
+     */
+    private function setDefault($default)
+    {
+        if ($default === null) {
+
+            $default = ' ';
+        }
+
+        if (!is_string($default)) {
+
+            throw new \InvalidArgumentException('Argument must be a string');
+        }
+
+        if (strlen($default) != 1) {
+
+            throw new \InvalidArgumentException('Default length must not be greater than one');
+        }
+
+        $this->default = $default;
         return $this;
     }
 }

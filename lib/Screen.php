@@ -23,13 +23,14 @@ class Screen extends AbstractBox implements ContainerInterface
      * @param int|null $color
      * @param int|null $option
      * @param int|null $bgcolor
+     * @param string|null $default
      */
-    protected function __construct($color = null, $option = null, $bgcolor = null)
+    protected function __construct($color = null, $option = null, $bgcolor = null, $default = null)
     {
         $width = (int) exec('tput cols');
         $height = (int) exec('tput lines');
 
-        parent::__construct($width, $height, $color, $option, $bgcolor);
+        parent::__construct($width, $height, $color, $option, $bgcolor, $default);
     }
 
     /**
@@ -39,11 +40,12 @@ class Screen extends AbstractBox implements ContainerInterface
      * @param int|null $color
      * @param int|null $option
      * @param int|null $bgcolor
+     * @param string|null $default
      * @return Screen
      */
-    static public function make($color = null, $option = null, $bgcolor = null)
+    static public function make($color = null, $option = null, $bgcolor = null, $default = null)
     {
-        return new self($color, $option, $bgcolor);
+        return new self($color, $option, $bgcolor, $default);
     }
 
     /**
