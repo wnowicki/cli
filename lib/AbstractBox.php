@@ -40,6 +40,7 @@ abstract class AbstractBox extends AbstractContainer
     /**
      * Put Element in Box
      *
+     * @author WN
      * @param Box|string $element
      * @param int $offset
      * @param int $row
@@ -73,13 +74,52 @@ abstract class AbstractBox extends AbstractContainer
     /**
      * Put Element in Center
      *
+     * @author WN
      * @param Box|string $element
      * @param int $row
      * @return $this
      */
     public function putInCenter($element, $row)
     {
-        $offset = floor(($this->getWidth() - $element->getWidth())/2);;
+        $this->putInColumn($element, 1, 1, $row);
+
+        return $this;
+    }
+
+    /**
+     * Put Element in Column
+     *
+     * @author WN
+     * @param Box|string $element
+     * @param int $columns
+     * @param int $column
+     * @param int $row
+     * @param bool $center
+     * @return $this
+     */
+    public function putInColumn($element, $columns, $column, $row, $center = true)
+    {
+        if ($column < 1 || $columns < 1 || $column > $columns) {
+
+            throw new \InvalidArgumentException('Columns and column must be positive integer');
+        }
+
+        if ($element instanceof ContainerInterface) {
+
+            $width = $element->getWidth();
+
+        } elseif (is_string($element)) {
+
+            $width = strlen($element);
+
+        } else {
+
+            throw new \InvalidArgumentException('Unsupported type of element');
+        }
+
+        $columnSize = $this->getWidth()/$columns;
+
+        $offset = floor(($column-1) * $columnSize + ($center?floor(($columnSize - $width)/2):0));
 
         $this->put($element, $offset, $row);
 
