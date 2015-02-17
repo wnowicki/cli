@@ -99,12 +99,43 @@ abstract class AbstractBox extends AbstractContainer
     {
         $box = Box::make($this->getWidth(), 1, $color, null, $bgcolor, $fill);
 
-        $this->put($box, 0, 0)->put($box, 0, $this->getHeight()-1);
+        $this->put($box, 0, 0)->put($box, 0, -1);
 
         $box = Box::make(1, $this->getHeight(), $color, null, $bgcolor, $fill);
 
-        $this->put($box, 0, 0)->put($box, $this->getWidth()-1, 0);
+        $this->put($box, 0, 0)->put($box, -1, 0);
         return $this;
+    }
+
+    /**
+     * Add Title
+     *
+     * @author WN
+     * @param string $title
+     * @param int|null $color
+     * @param int|null $option
+     * @param int|null $bgcolor
+     * @param int|null $borderColor
+     * @param int|null $borderBgColor
+     * @param string $borderFill
+     * @param int|null $size
+     * @return $this
+     */
+    public function addTitle(
+        $title,
+        $color = null,
+        $option = null,
+        $bgcolor = null,
+        $borderColor = null,
+        $borderBgColor = null,
+        $borderFill = '*',
+        $size = 0
+    ) {
+        $box = Box::make($this->getWidth(), (3 + 2*$size), $color, $option, $bgcolor)
+            ->addBorder($borderFill, $borderColor, $borderBgColor)
+            ->putInCenter(Box::makeFromString($title), $size + 1);
+
+        return $this->putInCenter($box, 0);
     }
 
     /**
