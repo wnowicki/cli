@@ -38,6 +38,8 @@ abstract class AbstractBox extends AbstractContainer
     }
 
     /**
+     * Put Element in Box
+     *
      * @param Box|string $element
      * @param int $offset
      * @param int $row
@@ -64,6 +66,22 @@ abstract class AbstractBox extends AbstractContainer
 
             throw new \InvalidArgumentException('Element must be type of Box or string');
         }
+
+        return $this;
+    }
+
+    /**
+     * Put Element in Center
+     *
+     * @param Box|string $element
+     * @param int $row
+     * @return $this
+     */
+    public function putInCenter($element, $row)
+    {
+        $offset = floor(($this->getWidth() - $element->getWidth())/2);;
+
+        $this->put($element, $offset, $row);
 
         return $this;
     }
