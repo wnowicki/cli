@@ -16,31 +16,42 @@ namespace WNowicki\Cli;
  * @author WN
  * @package WNowicki\Cli
  */
-class Box extends AbstractContainer implements ContainerInterface, \Iterator
+class Box extends AbstractBox implements ContainerInterface
 {
     /**
-     * @author WN
-     * @param int $cols
-     * @param int $rows
-     * @param string $fill
-     */
-    public function __construct($cols, $rows, $fill = ' ')
-    {
-        $this->rows = $rows;
-        $this->cols = $cols;
-
-        $this->matrix = $this->buildMatrix($this->rows(), $this->cols(), $fill);
-    }
-
-    /**
-     * @author WN
-     * @param $cols
-     * @param $rows
-     * @param string $fill
+     * @param int $width
+     * @param int $height
+     * @param int|null $color
+     * @param int|null $option
+     * @param int|null $bgcolor
      * @return Box
      */
-    public static function make($cols, $rows, $fill = ' ')
+    static public function make($width, $height, $color = null, $option = null, $bgcolor = null, $default = null)
     {
-        return new self($cols, $rows, $fill);
+        return new self($width, $height, $color, $option, $bgcolor, $default);
+    }
+
+    public static function makeFromString($string, $color = null, $option = null, $bgcolor = null)
+    {
+        if (!is_string($string)) {
+
+            throw new \InvalidArgumentException('Argument must be string');
+        }
+
+        $ar = explode("\n", $string);
+
+        $height = count($ar);
+        $width = strlen(max($ar));
+
+        $obj = new self($width, $height, $color, $option, $bgcolor);
+
+        $i = 0;
+
+        foreach ($obj as $row) {
+
+            $row->put(Row::makeFromString($ar[$i++], $color, $option, $bgcolor));
+        }
+
+        return $obj;
     }
 }

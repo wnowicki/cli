@@ -16,19 +16,19 @@ namespace WNowicki\Cli;
  * @author WN
  * @package WNowicki\Cli
  */
-interface ContainerInterface
+interface ContainerInterface extends \Iterator
 {
     /**
-     * Container Width
+     * Get Container Width
      *
      * @return int
      */
-    public function width();
+    public function getWidth();
 
     /**
-     * Container Height
+     * Get Container Height
      *
      * @return int
      */
-    public function height();
+    public function getHeight();
 }

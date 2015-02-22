@@ -1,15 +1,33 @@
 # PHP CLI Library
 by WNowicki
-## Examples
+
+## Install
+### Composer Installation
+To install *cli* library you will need to use [Composer](http://getcomposer.org/) in your project. If you aren't using Composer yet, it's really simple!
+```bash
+curl -sS https://getcomposer.org/installer | php
+```
+
+### Cli Installation
+```bash
+php composer.phar require wnowicki/cli:~1.0
+```
+
+## Example
 
 ```PHP
-$screen = \WNowicki\Cli\Screen::make()->addBorder('*')->addTitle('Example CLI Screen');
+$box = \WNowicki\Cli\Box::makeFromString("Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.", null, null, \WNowicki\Cli\Color::BG_RED);
 
-$screen->putIn(\WNowicki\Cli\Box::make(20,10)->addBorder('+')->addTitle('Example Box'), 10, 10);
+$box2 = \WNowicki\Cli\Box::make(20, 7, \WNowicki\Cli\Color::COLOR_YELLOW, null, \WNowicki\Cli\Color::BG_WHITE)
+    ->addBorder('*', null, \WNowicki\Cli\Color::BG_RED)
+    ->addTitle('Box', \WNowicki\Cli\Color::COLOR_BLACK);
 
-$screen->putIn('Updated: ' . date('H:i:s d/m/Y'), -2, -30);
-
-$screen->render();
+\WNowicki\Cli\Screen::make()
+    ->putInCenter($box, 6)
+    ->putInColumn($box2, 2, 1, 10)
+    ->putInColumn($box2, 2, 2, 10)
+    ->addTitle('Title', \WNowicki\Cli\Color::COLOR_GREEN, null, \WNowicki\Cli\Color::BG_BLACK)
+    ->render();
 ```
 
 ## Demo

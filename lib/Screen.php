@@ -16,30 +16,36 @@ namespace WNowicki\Cli;
  * @author WN
  * @package WNowicki\Cli
  */
-class Screen extends AbstractContainer implements \Iterator
+class Screen extends AbstractBox implements ContainerInterface
 {
     /**
      * @author WN
-     * @param string $fill
+     * @param int|null $color
+     * @param int|null $option
+     * @param int|null $bgcolor
+     * @param string|null $default
      */
-    public function __construct($fill = ' ')
+    protected function __construct($color = null, $option = null, $bgcolor = null, $default = null)
     {
-        $this->fill = $fill;
+        $width = (int) exec('tput cols');
+        $height = (int) exec('tput lines');
 
-        $this->rows = (int) exec('tput lines');
-        $this->cols = (int) exec('tput cols');
-
-        $this->matrix = $this->buildMatrix($this->rows, $this->cols, $fill);
+        parent::__construct($width, $height, $color, $option, $bgcolor, $default);
     }
 
     /**
+     * Make Screen
+     *
      * @author WN
-     * @param string $fill
+     * @param int|null $color
+     * @param int|null $option
+     * @param int|null $bgcolor
+     * @param string|null $default
      * @return Screen
      */
-    public static function make($fill = ' ')
+    static public function make($color = null, $option = null, $bgcolor = null, $default = null)
     {
-        return new self($fill);
+        return new self($color, $option, $bgcolor, $default);
     }
 
     /**
@@ -54,13 +60,13 @@ class Screen extends AbstractContainer implements \Iterator
 
         $y = 0;
 
-        foreach ($this->matrix as $row) {
+        foreach ($this as $row) {
 
-            echo $row->toString();
+            echo $row->render();
 
             $y++;
 
-            if ($y ==! $this->rows) {
+            if ($y ==! $this->getHeight()) {
                 echo "\n";
             }
         }
