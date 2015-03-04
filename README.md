@@ -1,6 +1,8 @@
 # PHP CLI Library
 by WNowicki
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wnowicki/cli/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wnowicki/cli/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/wnowicki/cli/badges/build.png?b=master)](https://scrutinizer-ci.com/g/wnowicki/cli/build-status/master)
+
 ## Install
 ### Composer Installation
 To install *cli* library you will need to use [Composer](http://getcomposer.org/) in your project. If you aren't using Composer yet, it's really simple!
